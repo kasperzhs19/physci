@@ -1,0 +1,2085 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Электрқозғалтқыштар мен көліктер</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --rosso: #FF2800;
+      --rosso-dark: #cc2000;
+      --black: #050505;
+      --carbon: #111111;
+      --gray: #1a1a1a;
+      --gray-light: #2a2a2a;
+      --text-muted: #888888;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--black);
+      color: #ffffff;
+      font-family: 'Montserrat', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* ─── CARBON FIBER TEXTURE ─── */
+    .carbon-bg {
+      background-color: #0a0a0a;
+      background-image:
+        repeating-linear-gradient(
+          45deg,
+          transparent,
+          transparent 2px,
+          rgba(255,255,255,0.015) 2px,
+          rgba(255,255,255,0.015) 4px
+        ),
+        repeating-linear-gradient(
+          -45deg,
+          transparent,
+          transparent 2px,
+          rgba(255,255,255,0.015) 2px,
+          rgba(255,255,255,0.015) 4px
+        );
+    }
+
+    .carbon-fiber {
+      background-color: #0d0d0d;
+      background-image:
+        linear-gradient(27deg, #151515 5px, transparent 5px),
+        linear-gradient(207deg, #151515 5px, transparent 5px),
+        linear-gradient(27deg, #222 0, #222 5px, transparent 5px, transparent 10px, #222 10px),
+        linear-gradient(207deg, #222 0, #222 5px, transparent 5px, transparent 10px, #222 10px),
+        linear-gradient(90deg, #1b1b1b 10px, transparent 10px),
+        linear-gradient(#1d1d1d 25%, #1a1a1a 25%, #1a1a1a 50%, transparent 50%, transparent 75%, #242424 75%, #242424);
+      background-size: 20px 20px;
+    }
+
+    /* ─── GLASSMORPHISM ─── */
+    .glass {
+      background: rgba(255, 255, 255, 0.04);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+    }
+
+    .glass-red {
+      background: rgba(255, 40, 0, 0.08);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 40, 0, 0.25);
+      border-radius: 16px;
+    }
+
+    /* ─── TYPOGRAPHY ─── */
+    .font-orbitron { font-family: 'Orbitron', sans-serif; }
+    .font-montserrat { font-family: 'Montserrat', sans-serif; }
+
+    .text-rosso { color: var(--rosso); }
+    .bg-rosso { background-color: var(--rosso); }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(5, 5, 5, 0.85);
+      backdrop-filter: blur(24px);
+      border-bottom: 1px solid rgba(255, 40, 0, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    .nav-logo {
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 900;
+      font-size: 1.1rem;
+      letter-spacing: 3px;
+      color: var(--rosso);
+      text-transform: uppercase;
+    }
+
+    .nav-logo span {
+      color: #fff;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      color: #aaa;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: color 0.3s;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--rosso);
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--rosso);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    /* ─── HERO SECTION ─── */
+    .hero {
+      position: relative;
+      height: 100vh;
+      min-height: 700px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      overflow: hidden;
+      padding: 0 8%;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('https://images.unsplash.com/photo-1592198084033-aade902d1aae?w=1800&q=85&auto=format&fit=crop');
+      background-size: cover;
+      background-position: center 40%;
+      filter: brightness(0.35) saturate(1.2);
+      transform: scale(1.05);
+      transition: transform 8s ease;
+    }
+
+    .hero-bg.loaded {
+      transform: scale(1);
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        105deg,
+        rgba(5, 5, 5, 0.92) 0%,
+        rgba(5, 5, 5, 0.65) 50%,
+        rgba(255, 40, 0, 0.08) 100%
+      );
+    }
+
+    .hero-overlay-bottom {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 200px;
+      background: linear-gradient(to top, var(--black), transparent);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 900px;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(255, 40, 0, 0.15);
+      border: 1px solid rgba(255, 40, 0, 0.4);
+      border-radius: 2px;
+      padding: 0.4rem 1rem;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      color: var(--rosso);
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      animation: fadeInUp 0.8s ease both;
+    }
+
+    .hero-tag::before {
+      content: '';
+      display: block;
+      width: 6px;
+      height: 6px;
+      background: var(--rosso);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    .hero-title {
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 900;
+      font-size: clamp(2.5rem, 6vw, 5.5rem);
+      line-height: 1.05;
+      letter-spacing: -1px;
+      text-transform: uppercase;
+      animation: fadeInUp 0.8s 0.2s ease both;
+    }
+
+    .hero-title .line-red {
+      color: var(--rosso);
+      display: block;
+    }
+
+    .hero-title .line-white {
+      color: #ffffff;
+      display: block;
+    }
+
+    .hero-subtitle {
+      margin-top: 1.5rem;
+      font-size: 0.95rem;
+      font-weight: 400;
+      color: #999;
+      max-width: 520px;
+      line-height: 1.8;
+      letter-spacing: 0.3px;
+      animation: fadeInUp 0.8s 0.4s ease both;
+    }
+
+    .hero-cta {
+      margin-top: 2.5rem;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      animation: fadeInUp 0.8s 0.6s ease both;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      background: var(--rosso);
+      color: white;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.72rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 0.9rem 2rem;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 0 100%);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+      transition: left 0.4s ease;
+    }
+
+    .btn-primary:hover::before {
+      left: 100%;
+    }
+
+    .btn-primary:hover {
+      background: #cc2000;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(255, 40, 0, 0.4);
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      background: transparent;
+      color: #fff;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.72rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 0.9rem 2rem;
+      text-decoration: none;
+      border: 1px solid rgba(255,255,255,0.2);
+      cursor: pointer;
+      clip-path: polygon(12px 0, 100% 0, 100% 100%, 0 100%, 0 12px);
+      transition: all 0.3s ease;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--rosso);
+      color: var(--rosso);
+    }
+
+    .hero-stats {
+      position: absolute;
+      bottom: 60px;
+      right: 8%;
+      z-index: 2;
+      display: flex;
+      gap: 3rem;
+      animation: fadeInRight 0.8s 0.8s ease both;
+    }
+
+    .hero-stat {
+      text-align: center;
+    }
+
+    .hero-stat-value {
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 800;
+      font-size: 2rem;
+      color: var(--rosso);
+      display: block;
+    }
+
+    .hero-stat-label {
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      color: #666;
+      text-transform: uppercase;
+      margin-top: 0.3rem;
+    }
+
+    /* ─── SECTION COMMON ─── */
+    section {
+      padding: 7rem 8%;
+      position: relative;
+    }
+
+    .section-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      color: var(--rosso);
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .section-tag::before {
+      content: '';
+      display: block;
+      width: 28px;
+      height: 2px;
+      background: var(--rosso);
+    }
+
+    .section-title {
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 800;
+      font-size: clamp(1.8rem, 3.5vw, 3rem);
+      text-transform: uppercase;
+      letter-spacing: -0.5px;
+      line-height: 1.1;
+    }
+
+    .section-divider {
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--rosso), transparent);
+      margin: 1.5rem 0;
+    }
+
+    /* ─── PHYSICS SECTION ─── */
+    .physics-section {
+      background-color: #070707;
+    }
+
+    .physics-intro {
+      max-width: 680px;
+    }
+
+    .physics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3.5rem;
+    }
+
+    .formula-card {
+      padding: 2rem;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .formula-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 3px;
+      height: 100%;
+      background: linear-gradient(to bottom, var(--rosso), transparent);
+    }
+
+    .formula-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 60px rgba(255, 40, 0, 0.12);
+    }
+
+    .formula-icon {
+      width: 48px;
+      height: 48px;
+      background: rgba(255, 40, 0, 0.12);
+      border: 1px solid rgba(255, 40, 0, 0.3);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      font-size: 1.3rem;
+    }
+
+    .formula-label {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      color: var(--rosso);
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .formula-name {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: #fff;
+      margin-bottom: 1rem;
+    }
+
+    .formula-eq {
+      background: rgba(0,0,0,0.4);
+      border: 1px solid rgba(255, 40, 0, 0.2);
+      border-radius: 8px;
+      padding: 1rem 1.5rem;
+      margin: 1rem 0;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--rosso);
+      text-align: center;
+      letter-spacing: 2px;
+    }
+
+    .formula-desc {
+      font-size: 0.82rem;
+      color: #888;
+      line-height: 1.8;
+    }
+
+    .formula-vars {
+      margin-top: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .formula-var {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      font-size: 0.78rem;
+      color: #777;
+    }
+
+    .formula-var-key {
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 700;
+      color: #ccc;
+      font-size: 0.78rem;
+      min-width: 24px;
+    }
+
+    /* ─── WORKING PRINCIPLE ─── */
+    .principle-section {
+      background: var(--black);
+    }
+
+    .principle-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      margin-top: 3.5rem;
+    }
+
+    .principle-img-wrap {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .principle-img-wrap img {
+      width: 100%;
+      height: 420px;
+      object-fit: cover;
+      filter: brightness(0.7) saturate(1.2);
+      border-radius: 16px;
+      display: block;
+    }
+
+    .principle-img-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,40,0,0.15) 0%, transparent 60%);
+      border-radius: 16px;
+      border: 1px solid rgba(255,40,0,0.2);
+    }
+
+    .principle-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .step-item {
+      display: flex;
+      gap: 1.2rem;
+      align-items: flex-start;
+      padding: 1.2rem;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.05);
+      transition: all 0.3s ease;
+    }
+
+    .step-item:hover {
+      background: rgba(255, 40, 0, 0.06);
+      border-color: rgba(255, 40, 0, 0.2);
+    }
+
+    .step-num {
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 900;
+      font-size: 1.6rem;
+      color: rgba(255, 40, 0, 0.3);
+      line-height: 1;
+      min-width: 40px;
+    }
+
+    .step-content h4 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: #fff;
+      margin-bottom: 0.4rem;
+    }
+
+    .step-content p {
+      font-size: 0.8rem;
+      color: #777;
+      line-height: 1.7;
+    }
+
+    /* ─── VEHICLES SECTION ─── */
+    .vehicles-section {
+      background: #050505;
+    }
+
+    .vehicles-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 2rem;
+      margin-top: 3.5rem;
+    }
+
+    .vehicle-card {
+      border-radius: 16px;
+      overflow: hidden;
+      background: #0d0d0d;
+      border: 1px solid rgba(255,255,255,0.06);
+      transition: all 0.4s ease;
+      position: relative;
+    }
+
+    .vehicle-card:hover {
+      transform: translateY(-10px);
+      border-color: rgba(255, 40, 0, 0.3);
+      box-shadow: 0 30px 80px rgba(255, 40, 0, 0.15);
+    }
+
+    .vehicle-card-img {
+      position: relative;
+      height: 240px;
+      overflow: hidden;
+    }
+
+    .vehicle-card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+      filter: brightness(0.75) saturate(1.3);
+    }
+
+    .vehicle-card:hover .vehicle-card-img img {
+      transform: scale(1.08);
+    }
+
+    .vehicle-badge {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      background: var(--rosso);
+      color: white;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.55rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 0.35rem 0.8rem;
+      clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 0 100%);
+    }
+
+    .vehicle-img-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 80px;
+      background: linear-gradient(to top, #0d0d0d, transparent);
+    }
+
+    .vehicle-card-body {
+      padding: 1.8rem;
+    }
+
+    .vehicle-brand {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      color: var(--rosso);
+      text-transform: uppercase;
+      margin-bottom: 0.4rem;
+    }
+
+    .vehicle-model {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 1.3rem;
+      color: #fff;
+      margin-bottom: 0.5rem;
+    }
+
+    .vehicle-type {
+      font-size: 0.75rem;
+      color: #555;
+      font-weight: 500;
+      letter-spacing: 1px;
+      margin-bottom: 1.5rem;
+    }
+
+    .vehicle-specs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .spec-item {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 8px;
+      padding: 0.8rem;
+      text-align: center;
+    }
+
+    .spec-value {
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--rosso);
+      display: block;
+    }
+
+    .spec-unit {
+      font-size: 0.65rem;
+      color: #555;
+      font-weight: 500;
+    }
+
+    .spec-label {
+      font-size: 0.65rem;
+      color: #666;
+      margin-top: 0.3rem;
+      display: block;
+      letter-spacing: 0.5px;
+    }
+
+    .vehicle-desc {
+      font-size: 0.8rem;
+      color: #666;
+      line-height: 1.7;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      padding-top: 1.2rem;
+    }
+
+    /* ─── REGEN & TECH SECTION ─── */
+    .tech-section {
+      background: #070707;
+    }
+
+    .tech-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3.5rem;
+    }
+
+    .tech-card {
+      padding: 2rem;
+      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%);
+      border: 1px solid rgba(255,255,255,0.07);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .tech-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 80px;
+      height: 80px;
+      background: radial-gradient(circle, rgba(255,40,0,0.08) 0%, transparent 70%);
+    }
+
+    .tech-card:hover {
+      border-color: rgba(255, 40, 0, 0.25);
+      box-shadow: 0 12px 40px rgba(255, 40, 0, 0.1);
+      transform: translateY(-4px);
+    }
+
+    .tech-icon-wrap {
+      width: 52px;
+      height: 52px;
+      background: linear-gradient(135deg, rgba(255,40,0,0.2), rgba(255,40,0,0.05));
+      border: 1px solid rgba(255,40,0,0.3);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      font-size: 1.5rem;
+    }
+
+    .tech-card h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      color: #fff;
+      margin-bottom: 0.8rem;
+    }
+
+    .tech-card p {
+      font-size: 0.82rem;
+      color: #777;
+      line-height: 1.75;
+    }
+
+    .tech-highlight {
+      margin-top: 1rem;
+      padding: 0.6rem 1rem;
+      background: rgba(255, 40, 0, 0.08);
+      border-left: 2px solid var(--rosso);
+      border-radius: 4px;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--rosso);
+      letter-spacing: 1px;
+    }
+
+    /* ─── COMPARISON TABLE ─── */
+    .table-section {
+      background: var(--black);
+    }
+
+    .table-wrap {
+      margin-top: 3.5rem;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 40, 0, 0.2);
+    }
+
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .comparison-table thead {
+      background: linear-gradient(90deg, rgba(255,40,0,0.15) 0%, rgba(255,40,0,0.05) 100%);
+    }
+
+    .comparison-table thead th {
+      padding: 1.2rem 1.5rem;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--rosso);
+      text-transform: uppercase;
+      text-align: center;
+      border-bottom: 1px solid rgba(255,40,0,0.2);
+    }
+
+    .comparison-table thead th:first-child {
+      text-align: left;
+    }
+
+    .comparison-table tbody tr {
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      transition: background 0.2s ease;
+    }
+
+    .comparison-table tbody tr:last-child {
+      border-bottom: none;
+    }
+
+    .comparison-table tbody tr:hover {
+      background: rgba(255, 40, 0, 0.05);
+    }
+
+    .comparison-table tbody td {
+      padding: 1.1rem 1.5rem;
+      font-size: 0.85rem;
+      color: #ccc;
+      text-align: center;
+    }
+
+    .comparison-table tbody td:first-child {
+      text-align: left;
+      font-weight: 600;
+      color: #aaa;
+      font-size: 0.78rem;
+      letter-spacing: 0.5px;
+    }
+
+    .table-brand {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+
+    .table-brand-name {
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 700;
+      font-size: 0.7rem;
+      color: var(--rosso);
+      letter-spacing: 1px;
+    }
+
+    .table-brand-model {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .table-badge {
+      display: inline-block;
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .badge-hybrid {
+      background: rgba(255, 170, 0, 0.15);
+      border: 1px solid rgba(255, 170, 0, 0.4);
+      color: #ffaa00;
+    }
+
+    .badge-electric {
+      background: rgba(0, 200, 255, 0.1);
+      border: 1px solid rgba(0, 200, 255, 0.3);
+      color: #00c8ff;
+    }
+
+    .td-best {
+      color: var(--rosso) !important;
+      font-family: 'Orbitron', sans-serif !important;
+      font-weight: 700 !important;
+    }
+
+    /* ─── FUTURE SECTION ─── */
+    .future-section {
+      background: #070707;
+    }
+
+    .future-grid {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 3rem;
+      margin-top: 3.5rem;
+      align-items: start;
+    }
+
+    .future-stat-card {
+      padding: 2.5rem;
+      text-align: center;
+      border-radius: 16px;
+      background: rgba(255,40,0,0.06);
+      border: 1px solid rgba(255,40,0,0.2);
+    }
+
+    .future-stat-num {
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 900;
+      font-size: 3.5rem;
+      color: var(--rosso);
+      display: block;
+      line-height: 1;
+    }
+
+    .future-stat-desc {
+      font-size: 0.8rem;
+      color: #666;
+      margin-top: 0.8rem;
+      line-height: 1.6;
+    }
+
+    .future-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .future-item {
+      display: flex;
+      gap: 1rem;
+      padding: 1.2rem 1.5rem;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.05);
+      transition: all 0.3s ease;
+    }
+
+    .future-item:hover {
+      background: rgba(255,40,0,0.05);
+      border-color: rgba(255,40,0,0.2);
+    }
+
+    .future-item-icon {
+      font-size: 1.5rem;
+      line-height: 1;
+    }
+
+    .future-item-content h4 {
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: #ddd;
+      margin-bottom: 0.3rem;
+    }
+
+    .future-item-content p {
+      font-size: 0.78rem;
+      color: #666;
+      line-height: 1.6;
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: #030303;
+      border-top: 1px solid rgba(255, 40, 0, 0.15);
+      padding: 3rem 8%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+
+    .footer-logo {
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 900;
+      font-size: 1rem;
+      letter-spacing: 3px;
+      color: var(--rosso);
+    }
+
+    .footer-logo span {
+      color: #333;
+    }
+
+    .footer-text {
+      font-size: 0.7rem;
+      color: #333;
+      letter-spacing: 1px;
+      text-align: center;
+    }
+
+    .footer-line {
+      width: 40px;
+      height: 1px;
+      background: var(--rosso);
+      display: inline-block;
+      vertical-align: middle;
+      margin: 0 0.5rem;
+    }
+
+    /* ─── ANIMATIONS ─── */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInRight {
+      from { opacity: 0; transform: translateX(30px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.7); }
+    }
+
+    @keyframes shimmer {
+      0% { background-position: -200% center; }
+      100% { background-position: 200% center; }
+    }
+
+    @keyframes countUp {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─── REVEAL ON SCROLL ─── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-40px);
+      transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal-left.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .reveal-right {
+      opacity: 0;
+      transform: translateX(40px);
+      transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal-right.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .delay-100 { transition-delay: 0.1s; }
+    .delay-200 { transition-delay: 0.2s; }
+    .delay-300 { transition-delay: 0.3s; }
+    .delay-400 { transition-delay: 0.4s; }
+    .delay-500 { transition-delay: 0.5s; }
+
+    /* ─── SCROLLBAR ─── */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: #0a0a0a; }
+    ::-webkit-scrollbar-thumb { background: var(--rosso); border-radius: 2px; }
+    ::-webkit-scrollbar-thumb:hover { background: #cc2000; }
+
+    /* ─── PROGRESS BAR ─── */
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--rosso), #ff6600);
+      z-index: 2000;
+      transition: width 0.1s linear;
+    }
+
+    /* ─── DECORATIVE LINES ─── */
+    .deco-line {
+      position: absolute;
+      background: linear-gradient(90deg, var(--rosso), transparent);
+      height: 1px;
+      opacity: 0.3;
+    }
+
+    /* ─── RED GLOW EFFECTS ─── */
+    .glow-red {
+      box-shadow: 0 0 30px rgba(255, 40, 0, 0.15);
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      section { padding: 5rem 6%; }
+      .hero { padding: 0 6%; }
+      .hero-stats { right: 6%; gap: 2rem; }
+      .principle-layout { grid-template-columns: 1fr; gap: 2rem; }
+      .future-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      footer { flex-direction: column; text-align: center; }
+    }
+
+    @media (max-width: 600px) {
+      section { padding: 4rem 5%; }
+      .hero { padding: 0 5%; }
+      .hero-stats { gap: 1.5rem; bottom: 30px; }
+      .hero-stat-value { font-size: 1.5rem; }
+      .vehicles-grid { grid-template-columns: 1fr; }
+      .vehicle-specs { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    /* ─── MOBILE MENU ─── */
+    .mobile-menu-btn {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .mobile-menu-btn span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: #fff;
+      transition: all 0.3s;
+    }
+    @media (max-width: 900px) {
+      .mobile-menu-btn { display: flex; }
+    }
+
+    /* ─── QUOTE BLOCK ─── */
+    .quote-block {
+      margin: 4rem 0;
+      padding: 2.5rem 3rem;
+      border-left: 3px solid var(--rosso);
+      background: rgba(255,40,0,0.04);
+      border-radius: 0 12px 12px 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .quote-block::before {
+      content: '"';
+      position: absolute;
+      top: -20px;
+      left: 20px;
+      font-size: 8rem;
+      font-family: 'Orbitron', sans-serif;
+      color: rgba(255,40,0,0.06);
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    .quote-text {
+      font-size: 1.1rem;
+      font-style: italic;
+      color: #aaa;
+      line-height: 1.8;
+      position: relative;
+    }
+
+    .quote-author {
+      margin-top: 1rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--rosso);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─── SCROLL PROGRESS ─── -->
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<!-- ─── NAV ─── -->
+<nav>
+  <div class="nav-logo">ELECTRO<span>KZ</span></div>
+  <ul class="nav-links">
+    <li><a href="#physics">Физика</a></li>
+    <li><a href="#principle">Принцип</a></li>
+    <li><a href="#vehicles">Көліктер</a></li>
+    <li><a href="#tech">Технология</a></li>
+    <li><a href="#compare">Салыстыру</a></li>
+  </ul>
+  <div class="mobile-menu-btn" id="mobileMenuBtn">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- ─── HERO ─── -->
+<section class="hero" id="hero">
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-overlay-bottom"></div>
+
+  <div class="hero-content">
+    <div class="hero-tag">
+      ⚡ Электр Революциясы · 2025
+    </div>
+    <h1 class="hero-title">
+      <span class="line-red">Электр</span>
+      <span class="line-white">Эволюциясы:</span>
+      <span class="line-red">Ferrari</span>
+      <span class="line-white">Стілінде</span>
+    </h1>
+    <p class="hero-subtitle">
+      Электрқозғалтқыштардың физикалық принциптерінен бастап, ең жылдам электр көліктеріне дейін — қуат пен инновацияның ұлы кездесуі.
+    </p>
+    <div class="hero-cta">
+      <a href="#physics" class="btn-primary">
+        <span>→</span> Зерттеуді бастау
+      </a>
+      <a href="#vehicles" class="btn-secondary">
+        <span>⚡</span> Көліктерді көру
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <span class="hero-stat-value">1900</span>
+      <span class="hero-stat-label">Жыл · Пайда болуы</span>
+    </div>
+    <div class="hero-stat">
+      <span class="hero-stat-value">1914</span>
+      <span class="hero-stat-label">ат күші · Невера</span>
+    </div>
+    <div class="hero-stat">
+      <span class="hero-stat-value">1.85с</span>
+      <span class="hero-stat-label">0–100 · Плейд</span>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PHYSICS SECTION ─── -->
+<section class="physics-section carbon-fiber" id="physics">
+  <div class="physics-intro reveal">
+    <div class="section-tag">Физикалық негіздер</div>
+    <h2 class="section-title">Электр <span style="color:var(--rosso)">Қозғалысының</span><br/>Заңдары</h2>
+    <div class="section-divider"></div>
+    <p style="font-size:0.88rem; color:#777; line-height:1.85; max-width:600px;">
+      Электрқозғалтқыш — заманауи инженерияның шыңы. Оның жұмыс принципі электромагниттік индукция мен Лоренц күшіне негізделген. Мына формулалар электр қозғалтқышының мәнін физика тілінде сипаттайды.
+    </p>
+  </div>
+
+  <div class="physics-grid">
+    <!-- LORENTZ -->
+    <div class="formula-card glass reveal delay-100">
+      <div class="formula-icon">⚡</div>
+      <div class="formula-label">01 · Лоренц Күші</div>
+      <div class="formula-name">Электромагниттік Күш</div>
+      <div class="formula-eq">F = qE + qv×B</div>
+      <p class="formula-desc">
+        Лоренц күші — зарядталған бөлшекке электр өрісі мен магнит өрісінің бірлескен әсерін сипаттайды. Электрқозғалтқыштың ең іргелі принципі осы заңға негізделген.
+      </p>
+      <div class="formula-vars">
+        <div class="formula-var">
+          <span class="formula-var-key">F</span>
+          <span>— Лоренц күші (Ньютон, Н)</span>
+        </div>
+        <div class="formula-var">
+          <span class="formula-var-key">q</span>
+          <span>— Зарядтың шамасы (Кулон, Кл)</span>
+        </div>
+        <div class="formula-var">
+          <span class="formula-var-key">E</span>
+          <span>— Электр өрісінің кернеулігі (В/м)</span>
+        </div>
+        <div class="formula-var">
+          <span class="formula-var-key">v×B</span>
+          <span>— Жылдамдық пен магнит индукциясының векторлық көбейтіндісі</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- TORQUE -->
+    <div class="formula-card glass reveal delay-200">
+      <div class="formula-icon">🔄</div>
+      <div class="formula-label">02 · Айналу Моменті</div>
+      <div class="formula-name">Механикалық Момент</div>
+      <div class="formula-eq">M = r × F</div>
+      <p class="formula-desc">
+        Айналу моменті — электрқозғалтқыштың ең маңызды сипаттамасы. Электр двигателі жұмыс бастаған лезде максималды момент береді, бұл оны жылу двигателінен басым етеді.
+      </p>
+      <div class="formula-vars">
+        <div class="formula-var">
+          <span class="formula-var-key">M</span>
+          <span>— Айналу моменті (Ньютон·метр, Н·м)</span>
+        </div>
+        <div class="formula-var">
+          <span class="formula-var-key">r</span>
+          <span>— Айналу радиусы (метр, м)</span>
+        </div>
+        <div class="formula-var">
+          <span class="formula-var-key">F</span>
+          <span>— Қолданылатын күш (Ньютон, Н)</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- EFFICIENCY -->
+    <div class="formula-card glass reveal delay-300">
+      <div class="formula-icon">📊</div>
+      <div class="formula-label">03 · Пайдалы Әсер Коэффициенті</div>
+      <div class="formula-name">Жүйе Тиімділігі</div>
+      <div class="formula-eq">η = P<sub>шығыс</sub> / P<sub>кіріс</sub></div>
+      <p class="formula-desc">
+        Электрқозғалтқыштың ПӘК-і 85–98% шамасында болады — бұл жылу қозғалтқышынан (30–45%) айтарлықтай жоғары. Рекуперативті тежеу арқылы энергия кері қайтарылады.
+      </p>
+      <div class="formula-vars">
+        <div class="formula-var">
+          <span class="formula-var-key">η</span>
+          <span>— Пайдалы әсер коэффициенті (0-ден 1-ге дейін)</span>
+        </div>
+        <div class="formula-var">
+          <span class="formula-var-key">P<sub>шығ</sub></span>
+          <span>— Пайдалы шығыс қуаты (Ватт)</span>
+        </div>
+        <div class="formula-var">
+          <span class="formula-var-key">P<sub>кір</sub></span>
+          <span>— Кіріс қуаты (Ватт)</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- FARADAY -->
+    <div class="formula-card glass reveal delay-400">
+      <div class="formula-icon">🧲</div>
+      <div class="formula-label">04 · Фарадей Индукциясы</div>
+      <div class="formula-name">ЭМ Индукция Заңы</div>
+      <div class="formula-eq">ε = −dΦ/dt</div>
+      <p class="formula-desc">
+        Фарадей заңы электрқозғалтқыштың регенеративті тежелу принципінің негізі болып табылады. Магнит ағынының өзгеруі ЭҚК тудырады, бұл арқылы кинетикалық энергия электр энергиясына айналады.
+      </p>
+      <div class="formula-vars">
+        <div class="formula-var">
+          <span class="formula-var-key">ε</span>
+          <span>— Электр қозғаушы күш (Вольт, В)</span>
+        </div>
+        <div class="formula-var">
+          <span class="formula-var-key">dΦ</span>
+          <span>— Магнит ағынының өзгерісі (Вебер, Вб)</span>
+        </div>
+        <div class="formula-var">
+          <span class="formula-var-key">dt</span>
+          <span>— Уақыт аралығы (секунд, с)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── WORKING PRINCIPLE ─── -->
+<section class="principle-section" id="principle">
+  <div class="reveal">
+    <div class="section-tag">Жұмыс Принципі</div>
+    <h2 class="section-title">Электрқозғалтқыш<br/><span style="color:var(--rosso)">Қалай Жұмыс Істейді?</span></h2>
+    <div class="section-divider"></div>
+  </div>
+
+  <div class="principle-layout">
+    <div class="principle-img-wrap reveal-left">
+      <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80&auto=format&fit=crop" alt="Electric motor components" loading="lazy" />
+      <div class="principle-img-overlay"></div>
+      <div style="position:absolute; bottom:1.5rem; left:1.5rem; right:1.5rem;">
+        <div class="glass" style="padding:1rem 1.2rem;">
+          <div style="font-family:'Orbitron',sans-serif; font-size:0.6rem; color:var(--rosso); letter-spacing:2px; margin-bottom:0.3rem;">АЙНАЛУ ЖИІЛІГІ</div>
+          <div style="font-family:'Orbitron',sans-serif; font-weight:800; font-size:1.5rem; color:#fff;">20,000 <span style="font-size:0.8rem; color:#777;">айн/мин</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="principle-steps reveal-right">
+      <p style="font-size:0.85rem; color:#777; line-height:1.85; margin-bottom:1.5rem;">
+        Электрқозғалтқыш — электр энергиясын механикалық энергияға айналдыратын құрылғы. Негізгі элементтер: статор (тұрақты бөлік) мен ротор (айналатын бөлік). Электромагниттік индукция арқылы магнит өрісі жасалып, ротор айналысқа келеді.
+      </p>
+
+      <div class="step-item">
+        <div class="step-num">01</div>
+        <div class="step-content">
+          <h4>Электр Тоғының Берілуі</h4>
+          <p>Аккумулятордан тұрақты ток (DC) инверторға беріледі. Инвертор оны айнымалы токқа (AC) айналдырады. Статор орамалары үш фазалы айнымалы ток арқылы қоздырылады.</p>
+        </div>
+      </div>
+
+      <div class="step-item">
+        <div class="step-num">02</div>
+        <div class="step-content">
+          <h4>Электромагниттік Индукция</h4>
+          <p>Статор орамалары арқылы ток өткен кезде айналмалы магнит өрісі пайда болады. Бұл құбылысты электромагниттік индукция деп атайды — Фарадей заңы іске асады.</p>
+        </div>
+      </div>
+
+      <div class="step-item">
+        <div class="step-num">03</div>
+        <div class="step-content">
+          <h4>Ротордың Айналуы</h4>
+          <p>Айналмалы магнит өрісі роторды Лоренц күшінің әсерімен айналысқа келтіреді. Ротор осі арқылы механикалық қуат беріліс жүйесіне жіберіледі.</p>
+        </div>
+      </div>
+
+      <div class="step-item">
+        <div class="step-num">04</div>
+        <div class="step-content">
+          <h4>Рекуперативті Тежеу</h4>
+          <p>Тежеу кезінде электрқозғалтқыш генератор режимінде жұмыс істейді. Кинетикалық энергия электр энергиясына айналып, аккумуляторды қайта зарядтайды — энергияны үнемдейді.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="quote-block reveal" style="margin-top:4rem;">
+    <p class="quote-text">
+      "Электрқозғалтқыш — ХХІ ғасырдың ең революциялық инженерлік жетістіктерінің бірі. Ол жылу двигателімен салыстырғанда 3 есе тиімді, 10 есе ұзақ қызмет ету мерзіміне ие және нөлдік тікелей шығарындыларымен ерекшеленеді."
+    </p>
+    <div class="quote-author">— Электромеханика Инженерлік Принциптері</div>
+  </div>
+</section>
+
+<!-- ─── VEHICLES ─── -->
+<section class="vehicles-section" id="vehicles">
+  <div class="reveal">
+    <div class="section-tag">Электр Көліктері</div>
+    <h2 class="section-title">Жылдамдықтың <span style="color:var(--rosso)">Шедеврлері</span></h2>
+    <div class="section-divider"></div>
+    <p style="font-size:0.88rem; color:#777; max-width:580px; line-height:1.8;">
+      Дүние жүзіндегі ең озық электр және гибридті спорт көліктері. Инженерлік озықтық пен аэродинамикалық дизайнның жарқын үлгілері.
+    </p>
+  </div>
+
+  <div class="vehicles-grid" style="margin-top:3.5rem;">
+
+    <!-- FERRARI SF90 -->
+    <div class="vehicle-card reveal delay-100">
+      <div class="vehicle-card-img">
+        <img src="https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=800&q=80&auto=format&fit=crop" alt="Ferrari SF90 Stradale" loading="lazy" />
+        <div class="vehicle-badge">Гибрид</div>
+        <div class="vehicle-img-overlay"></div>
+      </div>
+      <div class="vehicle-card-body">
+        <div class="vehicle-brand">Ferrari · Маранелло, Италия</div>
+        <div class="vehicle-model">SF90 Stradale</div>
+        <div class="vehicle-type">Plug-in Hybrid Supercar · 2020–Қазіргі</div>
+        <div class="vehicle-specs">
+          <div class="spec-item">
+            <span class="spec-value">1000</span>
+            <span class="spec-unit">ат күші</span>
+            <span class="spec-label">Жалпы қуат</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-value">2.5<span class="spec-unit">с</span></span>
+            <span class="spec-label">0–100 км/сағ</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-value">7.9<span class="spec-unit">кВт·сағ</span></span>
+            <span class="spec-label">Батарея сыйымдылығы</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-value">340</span>
+            <span class="spec-unit">км/сағ</span>
+            <span class="spec-label">Макс. жылдамдық</span>
+          </div>
+        </div>
+        <p class="vehicle-desc">
+          Ferrari SF90 Stradale — үш электрқозғалтқыш пен V8 жылу қозғалтқышын үйлестіретін гибридті шедевр. Алдыңғы осінде екі электрқозғалтқыш орналасқан, бұл толық жетекті (4WD) қамтамасыз етеді. Электр режимінде 25 км жүреді. MGU-K жүйесі рекуперативті тежеуді іске асырады.
+        </p>
+      </div>
+    </div>
+
+    <!-- TESLA MODEL S PLAID -->
+    <div class="vehicle-card reveal delay-200">
+      <div class="vehicle-card-img">
+        <img src="https://images.unsplash.com/photo-1560958089-b8a1929cea89?w=800&q=80&auto=format&fit=crop" alt="Tesla Model S Plaid" loading="lazy" />
+        <div class="vehicle-badge" style="background:#00c8ff; clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 0 100%);">Электр</div>
+        <div class="vehicle-img-overlay"></div>
+      </div>
+      <div class="vehicle-card-body">
+        <div class="vehicle-brand">Tesla · Остин, АҚШ</div>
+        <div class="vehicle-model">Model S Plaid</div>
+        <div class="vehicle-type">All-Electric Performance Sedan · 2021–Қазіргі</div>
+        <div class="vehicle-specs">
+          <div class="spec-item">
+            <span class="spec-value">1020</span>
+            <span class="spec-unit">ат күші</span>
+            <span class="spec-label">Жалпы қуат</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-value">1.85<span class="spec-unit">с</span></span>
+            <span class="spec-label">0–100 км/сағ</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-value">100<span class="spec-unit">кВт·сағ</span></span>
+            <span class="spec-label">Батарея сыйымдылығы</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-value">322</span>
+            <span class="spec-unit">км/сағ</span>
+            <span class="spec-label">Макс. жылдамдық</span>
+          </div>
+        </div>
+        <p class="vehicle-desc">
+          Tesla Model S Plaid — үш электрқозғалтқышты «carbon-sleeved» ротор технологиясымен жабдықталған. Tri-Motor AWD жүйесі кез келген жерде максималды тартымдылықты қамтамасыз етеді. Бір зарядтаудан 637 км жүріс мүмкіндігі, 1020 ат күші — жол автомобильдерінің арасындағы рекорд.
+        </p>
+      </div>
+    </div>
+
+    <!-- RIMAC NEVERA -->
+    <div class="vehicle-card reveal delay-300">
+      <div class="vehicle-card-img">
+        <img src="https://images.unsplash.com/photo-1607853202273-797f1c22a38e?w=800&q=80&auto=format&fit=crop" alt="Rimac Nevera" loading="lazy" />
+        <div class="vehicle-badge" style="background: linear-gradient(135deg, #7B2FBE, #FF2800); clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 0 100%);">Гиперкар</div>
+        <div class="vehicle-img-overlay"></div>
+      </div>
+      <div class="vehicle-card-body">
+        <div class="vehicle-brand">Rimac · Загреб, Хорватия</div>
+        <div class="vehicle-model">Nevera</div>
+        <div class="vehicle-type">All-Electric Hypercar · 2021–Қазіргі</div>
+        <div class="vehicle-specs">
+          <div class="spec-item">
+            <span class="spec-value">1914</span>
+            <span class="spec-unit">ат күші</span>
+            <span class="spec-label">Жалпы қуат</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-value">1.74<span class="spec-unit">с</span></span>
+            <span class="spec-label">0–100 км/сағ</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-value">120<span class="spec-unit">кВт·сағ</span></span>
+            <span class="spec-label">Батарея сыйымдылығы</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-value">412</span>
+            <span class="spec-unit">км/сағ</span>
+            <span class="spec-label">Макс. жылдамдық</span>
+          </div>
+        </div>
+        <p class="vehicle-desc">
+          Rimac Nevera — дүниедегі ең қуатты электр көлігі. Әрбір доңғалақта жеке электрқозғалтқыш орналасқан (Quad-Motor AWD). Torque Vectoring жүйесі миллисекундтарда реакция береді. 2023 жылы Bugatti Veyron рекордын жойып, 0–400–0 км/сағ нормативін 21.31 секундта орындады.
+        </p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── TECH SECTION ─── -->
+<section class="tech-section carbon-fiber" id="tech">
+  <div class="reveal">
+    <div class="section-tag">Технологиялар</div>
+    <h2 class="section-title">Болашақтың <span style="color:var(--rosso)">Технологиялары</span></h2>
+    <div class="section-divider"></div>
+    <p style="font-size:0.88rem; color:#777; max-width:580px; line-height:1.8;">
+      Заманауи электр көліктері тек қуатты двигательмен ғана емес, революциялық технологиялармен де ерекшеленеді. Инженерияның ең жаңа жетістіктері мен ұғымдарын тереңірек зерттейік.
+    </p>
+  </div>
+
+  <div class="tech-cards">
+
+    <div class="tech-card reveal delay-100">
+      <div class="tech-icon-wrap">🔋</div>
+      <h3>Литий-ион Аккумуляторы</h3>
+      <p>
+        Заманауи электр көліктерінің жүрегі — литий-ион батареясы. NMC (никель-марганец-кобальт) немесе LFP (литий-темір-фосфат) химиялық құрамы негізінде жасалады. Энергия тығыздығы: 250–300 Вт·сағ/кг.
+      </p>
+      <div class="tech-highlight">⚡ 350 кВт · DC Жылдам Зарядтау</div>
+    </div>
+
+    <div class="tech-card reveal delay-200">
+      <div class="tech-icon-wrap">🔄</div>
+      <h3>Рекуперативті Тежеу</h3>
+      <p>
+        Электрқозғалтқыш тежеу кезінде генераторға айналады. Кинетикалық энергия электр энергиясына конвертацияланып, аккумуляторды зарядтайды. Бұл технология Formula E жарысында 50% дейін энергияны қайтарады.
+      </p>
+      <div class="tech-highlight">♻ 30–50% Энергия Рекуперациясы</div>
+    </div>
+
+    <div class="tech-card reveal delay-300">
+      <div class="tech-icon-wrap">🎯</div>
+      <h3>Айналу Моментін Векторлау</h3>
+      <p>
+        Torque Vectoring — әрбір доңғалаққа берілетін айналу моментін жеке басқару технологиясы. Жолды ұстану, бұрылуда тұрақтылық және жылдамдату тиімділігі айтарлықтай артады. Rimac Nevera бұл жүйені миллисекундтарда реттейді.
+      </p>
+      <div class="tech-highlight">📐 Индивидуальды Доңғалақ Бақылауы</div>
+    </div>
+
+    <div class="tech-card reveal delay-400">
+      <div class="tech-icon-wrap">🌡️</div>
+      <h3>Термиялық Менеджмент</h3>
+      <p>
+        Аккумулятор мен электрқозғалтқыштың оңтайлы температурасын сақтау — 20–40°C. Сұйықтықтың суытылатын жүйелері мен жылу сорғылары іске асады. Tesla Octovalve жүйесі — ең жетілдірілген термоменеджмент шешімдерінің бірі.
+      </p>
+      <div class="tech-highlight">🌡 Оңтайлы 25°C Батарея Температурасы</div>
+    </div>
+
+    <div class="tech-card reveal delay-100">
+      <div class="tech-icon-wrap">⚙️</div>
+      <h3>Инвертор & IGBT</h3>
+      <p>
+        Инвертор тұрақты токты (DC) айнымалы токқа (AC) айналдырады. IGBT (Insulated Gate Bipolar Transistor) жартылай өткізгіш элементтері 98% тиімділікпен жұмыс істейді. Silicon Carbide (SiC) технологиясы инверторды одан да жетілдіреді.
+      </p>
+      <div class="tech-highlight">⚡ SiC MOSFET · 99% Тиімділік</div>
+    </div>
+
+    <div class="tech-card reveal delay-200">
+      <div class="tech-icon-wrap">🛰️</div>
+      <h3>BMS · Батарея Басқару Жүйесі</h3>
+      <p>
+        Battery Management System — аккумулятордың зарядын, температурасын, кернеуін және ток күшін нақты уақытта бақылайды. Жасуша теңгерімін (Cell Balancing) автоматты орындап, батарея қызмет мерзімін ұзартады.
+      </p>
+      <div class="tech-highlight">📊 5000+ Датчик · Нақты Уақыт Мониторингі</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── COMPARISON TABLE ─── -->
+<section class="table-section" id="compare">
+  <div class="reveal">
+    <div class="section-tag">Салыстырмалы Талдау</div>
+    <h2 class="section-title">Өнімділік <span style="color:var(--rosso)">Салыстыруы</span></h2>
+    <div class="section-divider"></div>
+    <p style="font-size:0.88rem; color:#777; max-width:580px; line-height:1.8;">
+      Үш электр және гибридті суперкардың техникалық сипаттамаларын салыстырмалы кесте арқылы талдайық. Деректер өндіруші компаниялардың ресми мәліметтеріне сүйенеді.
+    </p>
+  </div>
+
+  <div class="table-wrap reveal" style="margin-top:3.5rem;">
+    <table class="comparison-table">
+      <thead>
+        <tr>
+          <th>Сипаттама</th>
+          <th>Ferrari SF90 Stradale</th>
+          <th>Tesla Model S Plaid</th>
+          <th>Rimac Nevera</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Жүйе түрі</td>
+          <td><span class="table-badge badge-hybrid">PHEV Гибрид</span></td>
+          <td><span class="table-badge badge-electric">Толық Электр</span></td>
+          <td><span class="table-badge badge-electric">Толық Электр</span></td>
+        </tr>
+        <tr>
+          <td>Жалпы қуат (ат күші)</td>
+          <td>1,000 л.с.</td>
+          <td>1,020 л.с.</td>
+          <td class="td-best">1,914 л.с. 🏆</td>
+        </tr>
+        <tr>
+          <td>Айналу моменті (Н·м)</td>
+          <td>800 Н·м</td>
+          <td>1,420 Н·м</td>
+          <td class="td-best">2,360 Н·м 🏆</td>
+        </tr>
+        <tr>
+          <td>0–100 км/сағ</td>
+          <td>2.5 секунд</td>
+          <td class="td-best">1.85 секунд*</td>
+          <td>1.74 секунд 🏆</td>
+        </tr>
+        <tr>
+          <td>Максималды жылдамдық</td>
+          <td>340 км/сағ</td>
+          <td>322 км/сағ</td>
+          <td class="td-best">412 км/сағ 🏆</td>
+        </tr>
+        <tr>
+          <td>Батарея сыйымдылығы</td>
+          <td>7.9 кВт·сағ</td>
+          <td>100 кВт·сағ</td>
+          <td class="td-best">120 кВт·сағ 🏆</td>
+        </tr>
+        <tr>
+          <td>Жүріс қашықтығы (WLTP)</td>
+          <td>25 км (EV)</td>
+          <td>637 км 🏆</td>
+          <td>490 км</td>
+        </tr>
+        <tr>
+          <td>Электрқозғалтқыш саны</td>
+          <td>3 (алдыңғы 2 + арт 1)</td>
+          <td>3 (Tri-Motor)</td>
+          <td class="td-best">4 (Quad-Motor) 🏆</td>
+        </tr>
+        <tr>
+          <td>Жылдам зарядтау</td>
+          <td>7.4 кВт (AC)</td>
+          <td class="td-best">250 кВт (DC)</td>
+          <td>500 кВт (DC) 🏆</td>
+        </tr>
+        <tr>
+          <td>Нарықтық бағасы (USD)</td>
+          <td>$625,000+</td>
+          <td>$89,990+</td>
+          <td class="td-best">$2,400,000+</td>
+        </tr>
+        <tr>
+          <td>Шығарылған саны</td>
+          <td>Шектеусіз</td>
+          <td>Шектеусіз</td>
+          <td class="td-best">150 дана ғана</td>
+        </tr>
+        <tr>
+          <td>CO₂ шығарындылары</td>
+          <td>99 г/км</td>
+          <td class="td-best">0 г/км</td>
+          <td class="td-best">0 г/км</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div style="margin-top:1.5rem; padding:1rem 1.5rem; background:rgba(255,255,255,0.02); border-radius:8px; border:1px solid rgba(255,255,255,0.05);">
+    <p style="font-size:0.72rem; color:#555; line-height:1.7;">
+      * Tesla Model S Plaid 1.85 секунд — 1 фут Rollout шегерілмеген нақты нәтиже. 🏆 белгісі — осы санат бойынша үздік нәтижені білдіреді. Деректер 2024–2025 жылдардағы өндіруші ресми мәліметтерінен алынды.
+    </p>
+  </div>
+</section>
+
+<!-- ─── FUTURE SECTION ─── -->
+<section class="future-section carbon-fiber" id="future">
+  <div class="reveal">
+    <div class="section-tag">Болашақ</div>
+    <h2 class="section-title">Электрлі <span style="color:var(--rosso)">Болашақ</span></h2>
+    <div class="section-divider"></div>
+  </div>
+
+  <div class="future-grid">
+    <div class="reveal-left" style="display:flex; flex-direction:column; gap:1.5rem;">
+      <div class="future-stat-card">
+        <span class="future-stat-num">2035</span>
+        <p class="future-stat-desc">ЕО елдерінің жылу қозғалтқышты автомобиль сатуына толық тиым салу жоспарланған жыл</p>
+      </div>
+      <div class="future-stat-card">
+        <span class="future-stat-num">40%</span>
+        <p class="future-stat-desc">2030 жылға қарай жаңа автомобиль сатылымының электр көліктеріне тиесілі болатын үлесі</p>
+      </div>
+      <div class="future-stat-card">
+        <span class="future-stat-num">800В</span>
+        <p class="future-stat-desc">Келесі буын электр көліктерінің зарядтау архитектурасы — 20 минутта толық зарядтайды</p>
+      </div>
+    </div>
+
+    <div class="future-list reveal-right">
+      <h3 style="font-family:'Orbitron',sans-serif; font-weight:700; font-size:1rem; color:#fff; margin-bottom:1rem; letter-spacing:1px; text-transform:uppercase;">Алдағы Технологиялар</h3>
+
+      <div class="future-item">
+        <div class="future-item-icon">🔋</div>
+        <div class="future-item-content">
+          <h4>Қатты Денелі Батарея (Solid-State)</h4>
+          <p>Toyota, Samsung SDI және QuantumScape компаниялары 2027–2030 жылдарға қатты денелі литий батареясын нарыққа шығаруды жоспарлауда. Энергия тығыздығы 2 есе артады, зарядтау уақыты 10 минутқа дейін қысқарады.</p>
+        </div>
+      </div>
+
+      <div class="future-item">
+        <div class="future-item-icon">⚡</div>
+        <div class="future-item-content">
+          <h4>Мега/Гигавольт Зарядтау</h4>
+          <p>Tesla Megacharger (1–1.5 МВт) және Xpeng S4 (800 кВт) — 5 минутта 400 км жүріске жетерлік зарядтау. Жол бойындағы зарядтау инфрақұрылымы толығымен өзгереді.</p>
+        </div>
+      </div>
+
+      <div class="future-item">
+        <div class="future-item-icon">🛰️</div>
+        <div class="future-item-content">
+          <h4>V2G · Көліктен Торапқа</h4>
+          <p>Vehicle-to-Grid технологиясы электр көлігін энергия жинаушы ретінде пайдаланады. Электр торабына қосылып, пик уақыттарда үйді немесе торапты энергиямен қамтамасыз ете алады.</p>
+        </div>
+      </div>
+
+      <div class="future-item">
+        <div class="future-item-icon">🤖</div>
+        <div class="future-item-content">
+          <h4>AI-басқарылатын Электр Жүйесі</h4>
+          <p>Жасанды интеллект батарея денсаулығын болжайды, зарядтау стратегиясын оңтайландырады және рекуперативті тежеу тиімділігін максималды деңгейге жеткізеді.</p>
+        </div>
+      </div>
+
+      <div class="future-item">
+        <div class="future-item-icon">🏎️</div>
+        <div class="future-item-content">
+          <h4>Ferrari Purosangue Electric</h4>
+          <p>Ferrari 2025 жылы алғашқы толық электр спорт автомобилін анонстады. Маранелло инженерлерінің 100 жылдық тәжірибесі электр платформасымен кездеседі — суперкар дүниесінде жаңа дәуір басталады.</p>
+        </div>
+      </div>
+
+      <div class="future-item">
+        <div class="future-item-icon">🌿</div>
+        <div class="future-item-content">
+          <h4>Тұрақты Өндіріс (Green Manufacturing)</h4>
+          <p>BMW, Mercedes-Benz және Volvo 2025 жылдан бастап барлық электр көлігін жаңартылатын энергия көздерін пайдаланып өндіруге міндеттенген. Батарея өндірісіндегі CO₂ шығарындылары 80% қысқарады.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-logo">ELECTRO<span>KZ</span></div>
+  <div class="footer-text">
+    <span class="footer-line"></span>
+    Электрқозғалтқыштар мен Электр Көліктері · Қазақстан · 2025
+    <span class="footer-line"></span>
+  </div>
+  <div style="font-family:'Orbitron',sans-serif; font-size:0.55rem; color:#222; letter-spacing:2px; text-transform:uppercase;">
+    ⚡ ЭЛЕКТР ЭВОЛЮЦИЯСЫ
+  </div>
+</footer>
+
+<!-- ─── JAVASCRIPT ─── -->
+<script>
+  // ─── SCROLL PROGRESS ───
+  const progressBar = document.getElementById('scrollProgress');
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = (scrollTop / docHeight) * 100;
+    progressBar.style.width = progress + '%';
+  });
+
+  // ─── HERO BG PARALLAX / LOAD ───
+  const heroBg = document.getElementById('heroBg');
+  window.addEventListener('load', () => {
+    heroBg.classList.add('loaded');
+  });
+
+  window.addEventListener('scroll', () => {
+    const scrolled = window.scrollY;
+    heroBg.style.transform = `scale(1) translateY(${scrolled * 0.3}px)`;
+  });
+
+  // ─── REVEAL ON SCROLL ───
+  const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.1,
+    rootMargin: '0px 0px -60px 0px'
+  });
+
+  revealElements.forEach(el => revealObserver.observe(el));
+
+  // ─── NAV SCROLL EFFECT ───
+  const nav = document.querySelector('nav');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 80) {
+      nav.style.padding = '0.7rem 2rem';
+      nav.style.borderBottomColor = 'rgba(255, 40, 0, 0.3)';
+    } else {
+      nav.style.padding = '1rem 2rem';
+      nav.style.borderBottomColor = 'rgba(255, 40, 0, 0.2)';
+    }
+  });
+
+  // ─── SMOOTH SCROLL ───
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const target = document.querySelector(link.getAttribute('href'));
+      if (target) {
+        const offset = 70;
+        const top = target.getBoundingClientRect().top + window.scrollY - offset;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+    });
+  });
+
+  // ─── COUNTER ANIMATION ───
+  function animateCounter(el, target, suffix = '') {
+    let start = 0;
+    const duration = 2000;
+    const step = (timestamp) => {
+      if (!start) start = timestamp;
+      const progress = Math.min((timestamp - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 4);
+      const value = Math.floor(eased * target);
+      el.textContent = value.toLocaleString() + suffix;
+      if (progress < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }
+
+  // Hero stats counter
+  const statValues = document.querySelectorAll('.hero-stat-value');
+  const heroObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        const text = el.textContent;
+        if (text === '1900') animateCounter(el, 1900, '');
+        else if (text === '1914') animateCounter(el, 1914, '');
+        heroObserver.unobserve(el);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  statValues.forEach(el => heroObserver.observe(el));
+
+  // ─── FORMULA CARD HOVER GLOW ───
+  document.querySelectorAll('.formula-card').forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      card.style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(255,40,0,0.08) 0%, rgba(255,255,255,0.03) 50%)`;
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.background = '';
+    });
+  });
+
+  // ─── TABLE ROW HIGHLIGHT ───
+  document.querySelectorAll('.comparison-table tbody tr').forEach(row => {
+    row.addEventListener('mouseenter', () => {
+      row.style.transition = 'background 0.2s';
+    });
+  });
+
+  // ─── VEHICLE CARD TILT EFFECT ───
+  document.querySelectorAll('.vehicle-card').forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - 0.5;
+      const y = (e.clientY - rect.top) / rect.height - 0.5;
+      card.style.transform = `translateY(-10px) rotateY(${x * 4}deg) rotateX(${-y * 4}deg)`;
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = 'translateY(0) rotateY(0) rotateX(0)';
+    });
+  });
+
+  // ─── MOBILE MENU ───
+  const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+  const navLinks = document.querySelector('.nav-links');
+  let menuOpen = false;
+
+  mobileMenuBtn.addEventListener('click', () => {
+    menuOpen = !menuOpen;
+    if (menuOpen) {
+      navLinks.style.display = 'flex';
+      navLinks.style.flexDirection = 'column';
+      navLinks.style.position = 'absolute';
+      navLinks.style.top = '100%';
+      navLinks.style.left = '0';
+      navLinks.style.right = '0';
+      navLinks.style.background = 'rgba(5,5,5,0.98)';
+      navLinks.style.padding = '1.5rem 2rem';
+      navLinks.style.borderBottom = '1px solid rgba(255,40,0,0.2)';
+      navLinks.style.gap = '1.2rem';
+      mobileMenuBtn.children[0].style.transform = 'rotate(45deg) translateY(7px)';
+      mobileMenuBtn.children[1].style.opacity = '0';
+      mobileMenuBtn.children[2].style.transform = 'rotate(-45deg) translateY(-7px)';
+    } else {
+      navLinks.style.display = '';
+      navLinks.style.flexDirection = '';
+      navLinks.style.position = '';
+      navLinks.style.top = '';
+      navLinks.style.left = '';
+      navLinks.style.right = '';
+      navLinks.style.background = '';
+      navLinks.style.padding = '';
+      navLinks.style.borderBottom = '';
+      navLinks.style.gap = '';
+      mobileMenuBtn.children[0].style.transform = '';
+      mobileMenuBtn.children[1].style.opacity = '';
+      mobileMenuBtn.children[2].style.transform = '';
+    }
+  });
+
+  // Close mobile menu on link click
+  navLinks.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      if (menuOpen) mobileMenuBtn.click();
+    });
+  });
+
+  // ─── TYPED EFFECT FOR HERO TITLE (subtle) ───
+  // Add sparkle cursor effect
+  document.addEventListener('mousemove', (e) => {
+    if (Math.random() > 0.97) {
+      const spark = document.createElement('div');
+      spark.style.cssText = `
+        position:fixed; left:${e.clientX}px; top:${e.clientY}px;
+        width:4px; height:4px; background:var(--rosso);
+        border-radius:50%; pointer-events:none; z-index:9999;
+        animation: sparkFade 0.6s ease forwards;
+      `;
+      document.body.appendChild(spark);
+      setTimeout(() => spark.remove(), 600);
+    }
+  });
+
+  // Add sparkFade keyframe dynamically
+  const style = document.createElement('style');
+  style.textContent = `
+    @keyframes sparkFade {
+      0% { opacity:1; transform: scale(1) translateY(0); }
+      100% { opacity:0; transform: scale(0) translateY(-20px); }
+    }
+  `;
+  document.head.appendChild(style);
+</script>
+
+</body>
+</html>
